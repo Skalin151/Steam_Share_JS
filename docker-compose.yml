@@ -17,6 +17,4 @@ services:
       - USER_3_API_KEY=${USER_3_API_KEY:-}
       - USER_3_STEAM_ID=${USER_3_STEAM_ID:-}
       - USER_3_NAME=${USER_3_NAME:-}
-    volumes:
-      - ./steam_games_aggregated.csv:/app/steam_games_aggregated.csv
     restart: unless-stopped
