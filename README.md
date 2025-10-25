@@ -39,6 +39,21 @@ A aplicação estará disponível em `http://localhost:3000`
 
 ## 🐳 Docker
 
+### Com Docker Compose (Recomendado)
+
+```bash
+# Iniciar a aplicação
+docker-compose up -d
+
+# Ver logs
+docker-compose logs -f
+
+# Parar a aplicação
+docker-compose down
+```
+
+### Com Docker (Manual)
+
 ```bash
 # Construir a imagem
 docker build -t steam-share-app .

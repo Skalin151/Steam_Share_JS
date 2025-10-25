@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  steam-share-app:
+    build: .
+    container_name: steam-share-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./users.txt:/app/users.txt:ro
+      - ./steam_games_aggregated.csv:/app/steam_games_aggregated.csv
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    restart: unless-stopped
