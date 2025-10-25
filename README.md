@@ -16,18 +16,29 @@ npm install
 
 ## ⚙️ Configuração
 
-Cria um ficheiro `users.txt` na raiz do projeto com o formato:
+Cria um ficheiro `.env` na raiz do projeto (copia o `.env.example`):
 
-```
-API_KEY,STEAM_ID,NOME_UTILIZADOR
-API_KEY,STEAM_ID,NOME_UTILIZADOR
+```bash
+cp .env.example .env
 ```
 
-**Exemplo:**
+Edita o ficheiro `.env` com os teus dados:
+
+```env
+PORT=1515
+
+# Utilizador 1
+USER_1_API_KEY=SUA_CHAVE_API_STEAM
+USER_1_STEAM_ID=76561198012345678
+USER_1_NAME=João
+
+# Utilizador 2
+USER_2_API_KEY=SUA_CHAVE_API_STEAM
+USER_2_STEAM_ID=76561198087654321
+USER_2_NAME=Maria
 ```
-ABC123XYZ,76561198012345678,João
-ABC123XYZ,76561198087654321,Maria
-```
+
+Podes adicionar mais utilizadores seguindo o padrão `USER_3`, `USER_4`, etc.
 
 ## ▶️ Executar
 
@@ -35,7 +46,7 @@ ABC123XYZ,76561198087654321,Maria
 npm start
 ```
 
-A aplicação estará disponível em `http://localhost:3000`
+A aplicação estará disponível em `http://localhost:1515`
 
 ## 🐳 Docker
 
@@ -59,7 +70,7 @@ docker-compose down
 docker build -t steam-share-app .
 
 # Rodar o container
-docker run -p 3000:3000 -v ${PWD}/users.txt:/app/users.txt steam-share-app
+docker run -p 1515:1515 --env-file .env steam-share-app
 ```
 
 ## 📦 Funcionalidades

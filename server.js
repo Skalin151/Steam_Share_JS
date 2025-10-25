@@ -4,8 +4,11 @@ const { aggregateGames, loadUsers } = require('./utils/steam');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const fs = require('fs');
 
+// Carrega variáveis de ambiente
+require('dotenv').config();
+
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 1515;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));

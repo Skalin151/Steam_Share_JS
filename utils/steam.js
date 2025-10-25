@@ -2,23 +2,33 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-const USERS_FILE = path.join(__dirname, '..', 'users.txt');
-
 function loadUsers() {
   try {
-    const data = fs.readFileSync(USERS_FILE, 'utf8');
-    const lines = data.trim().split('\n');
     const users = [];
     const userNames = {};
-    for (const line of lines) {
-      if (!line.trim()) continue; // ignora linhas vazias
-      const [api_key, steam_id, name] = line.split(',').map(s => s.trim());
-      users.push({ api_key, steam_id });
-      userNames[steam_id] = name;
+    
+    // Procura por variáveis de ambiente no formato USER_1_API_KEY, USER_1_STEAM_ID, USER_1_NAME
+    let userIndex = 1;
+    while (process.env[`USER_${userIndex}_API_KEY`]) {
+      const apiKey = process.env[`USER_${userIndex}_API_KEY`];
+      const steamId = process.env[`USER_${userIndex}_STEAM_ID`];
+      const name = process.env[`USER_${userIndex}_NAME`] || `User ${userIndex}`;
+      
+      if (apiKey && steamId) {
+        users.push({ api_key: apiKey, steam_id: steamId });
+        userNames[steamId] = name;
+      }
+      
+      userIndex++;
     }
+    
+    if (users.length === 0) {
+      console.error('Nenhum utilizador configurado nas variáveis de ambiente.');
+    }
+    
     return { users, userNames };
   } catch (err) {
-    console.error('Erro ao carregar users.txt:', err.message);
+    console.error('Erro ao carregar utilizadores:', err.message);
     return { users: [], userNames: {} };
   }
 }
