@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Steam Family Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body { 
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #e0e0e0;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #f1f5f9;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .controls {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    form {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    input[type="text"], select {
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid rgba(148, 163, 184, 0.3);
+      border-radius: 12px;
+      padding: 12px 18px;
+      color: #e0e0e0;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    input[type="text"]:focus, select:focus {
+      outline: none;
+      border-color: #64748b;
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 20px rgba(100, 116, 139, 0.3);
+    }
+
+    input[type="text"]::placeholder {
+      color: rgba(224, 224, 224, 0.5);
+    }
+
+    button {
+      background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+      border: none;
+      border-radius: 12px;
+      padding: 12px 24px;
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+      background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    a button {
+      background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+    }
+
+    a button:hover {
+      background: linear-gradient(135deg, #db2777 0%, #ec4899 100%);
+      box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
+    }
+
+    .table-container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: linear-gradient(135deg, #334155 0%, #475569 100%);
+      padding: 18px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid rgba(148, 163, 184, 0.3);
+    }
+
+    td {
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.95rem;
+    }
+
+    tr:hover {
+      background: rgba(148, 163, 184, 0.1);
+      transition: background 0.2s ease;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .copies-cell {
+      text-align: center;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    .appid-cell {
+      color: #9ca3af;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    .no-games {
+      text-align: center;
+      padding: 60px 20px;
+      color: rgba(224, 224, 224, 0.6);
+      font-size: 1.1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      margin-top: 30px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      form {
+        flex-direction: column;
+      }
+
+      input[type="text"], select, button {
+        width: 100%;
+      }
+
+      table {
+        font-size: 0.85rem;
+      }
+
+      th, td {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 Steam Family Games</h1>
+
+    <div class="controls">
+      <form method="GET">
+        <input type="text" name="search" placeholder="Pesquisar jogo ou AppID..." value="<%= search %>" />
+        
+        <select name="userFilter">
+          <option value="All" <%= userFilter === 'All' ? 'selected' : '' %>>Todos os Usuários</option>
+          <% userOptions.forEach(user => { %>
+            <option value="<%= user %>" <%= userFilter === user ? 'selected' : '' %>>
+              <%= user %>
+            </option>
+          <% }); %>
+        </select>
+
+        <select name="sortOrder">
+          <option value="Name (A-Z)" <%= sortOrder === 'Name (A-Z)' ? 'selected' : '' %>>Nome (A-Z)</option>
+          <option value="Name (Z-A)" <%= sortOrder === 'Name (Z-A)' ? 'selected' : '' %>>Nome (Z-A)</option>
+          <option value="Copies (Asc)" <%= sortOrder === 'Copies (Asc)' ? 'selected' : '' %>>Cópias (Crescente)</option>
+          <option value="Copies (Desc)" <%= sortOrder === 'Copies (Desc)' ? 'selected' : '' %>>Cópias (Decrescente)</option>
+        </select>
+        
+        <button type="submit">Filtrar</button>
+        <a href="/export-csv"><button type="button">Exportar CSV</button></a>
+        <a href="/"><button type="button">Limpar Filtros</button></a>
+      </form>
+    </div>
+
+    <% if (games.length > 0) { %>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>AppID</th>
+              <th>Nome do Jogo</th>
+              <th style="text-align:center;">Cópias</th>
+              <th>Proprietários</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% games.forEach(game => { %>
+              <tr>
+                <td class="appid-cell"><%= game.appid %></td>
+                <td><%= game.name %></td>
+                <td class="copies-cell"><%= game.copies %></td>
+                <td><%= game.owners %></td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    <% } else { %>
+      <div class="no-games">
+        <p>Nenhum jogo encontrado.</p>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>
